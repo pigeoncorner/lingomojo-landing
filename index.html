@@ -1,99 +1,704 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LingoMojo - Учи английский через детективные истории</title>
-    
-    <!-- Favicons -->
+    <title>LingoMojo</title>
+
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0d0d1a;
+            --bg-mid: #13132b;
+            --bg-card: #1a1a35;
+            --accent: #4ecca3;
+            --accent-glow: rgba(78, 204, 163, 0.25);
+            --accent-dim: rgba(78, 204, 163, 0.12);
+            --text: #e8e8f0;
+            --text-muted: #8888aa;
+            --text-dim: #555577;
+            --border: rgba(78, 204, 163, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ── Noise overlay ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.35;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Header ── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(13, 13, 26, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a.nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a.nav-link:hover { color: var(--accent); }
+
+        /* Language toggle */
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3px;
+            cursor: pointer;
+        }
+
+        .lang-btn {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 16px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.05em;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: #0d0d1a;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background: var(--accent);
+            color: #0d0d1a;
+            padding: 0.65rem 1.4rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.02em;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--accent-glow);
+        }
+
+        .cta-button.large {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 88vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 5rem 0;
+        }
+
+        /* Radial glow behind hero */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(78,204,163,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 5px 14px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.6s 0.1s ease forwards;
+        }
+
+        .hero h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.4rem, 6vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            max-width: 720px;
+            opacity: 0;
+            animation: fadeUp 0.6s 0.2s ease forwards;
+        }
+
+        .hero h2 em {
+            font-style: normal;
+            color: var(--accent);
+            position: relative;
+        }
+
+        .hero h2 em::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            opacity: 0.4;
+            border-radius: 2px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeUp 0.6s 0.3s ease forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.6s 0.4s ease forwards;
+        }
+
+        .hero-note {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        /* Floating grid lines decoration */
+        .hero-grid {
+            position: absolute;
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            grid-template-rows: repeat(5, 60px);
+            gap: 12px;
+            opacity: 0.07;
+            pointer-events: none;
+        }
+
+        .hero-grid span {
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+        }
+
+        .hero-grid span:nth-child(3n) { opacity: 0.4; }
+        .hero-grid span:nth-child(5n) { background: var(--accent); }
+
+        /* ── About / Problems ── */
+        .about {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-label {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 3.5rem;
+            max-width: 600px;
+        }
+
+        .problems {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .problem-card:hover {
+            border-color: rgba(78, 204, 163, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .problem-card .icon {
+            font-size: 2.2rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Divider line */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 0 24px;
+        }
+
+        /* ── Features ── */
+        .features {
+            padding: 6rem 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .feature {
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .feature:hover {
+            border-color: rgba(78, 204, 163, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature:hover::before { opacity: 1; }
+
+        .feature .number {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .feature h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.01em;
+        }
+
+        .feature p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ── Final CTA ── */
+        .cta-final {
+            padding: 7rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-final::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(78,204,163,0.07) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .cta-final h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .cta-final p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .cta-final .cta-button { position: relative; }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-dim);
+            font-size: 0.82rem;
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            nav a.nav-link { display: none; }
+
+            header .container { padding: 0 20px; }
+
+            .hero { min-height: auto; padding: 4rem 0; }
+
+            .hero-grid { display: none; }
+
+            .hero-cta { flex-direction: column; align-items: flex-start; }
+
+            .cta-button.large { width: 100%; text-align: center; }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- ══════════════════════════════════════
+         LANGUAGE DETECTION + TOGGLE SCRIPT
+    ══════════════════════════════════════ -->
+    <script>
+        (function () {
+            // Check saved preference first, then browser language
+            const saved = localStorage.getItem('lingomojo-lang');
+            const browserLang = navigator.language || navigator.userLanguage || '';
+            const isRussian = saved ? saved === 'ru' : browserLang.startsWith('ru');
+            window.__lang = isRussian ? 'ru' : 'en';
+        })();
+    </script>
+
+    <!-- ══════════════════════════════════════
+         HEADER
+    ══════════════════════════════════════ -->
     <header>
         <div class="container">
-            <h1>🔍 LingoMojo</h1>
+            <a href="#" class="logo">🔍 Lingo<span>Mojo</span></a>
             <nav>
-                <a href="#about">О платформе</a>
-                <a href="#features">Возможности</a>
-                <a href="https://t.me/LingoMojo_bot?start=abzra8fa8s" class="cta-button">Начать</a>
+                <a href="#about"  class="nav-link" data-ru="О платформе"  data-en="About"></a>
+                <a href="#features" class="nav-link" data-ru="Возможности" data-en="Features"></a>
+
+                <div class="lang-toggle" aria-label="Switch language">
+                    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn" id="btn-ru" onclick="setLang('ru')">RU</button>
+                </div>
+
+                <a href="https://t.me/LingoMojo_bot?start=abzra8fa8s" class="cta-button"
+                   data-ru="Начать" data-en="Get Started"></a>
             </nav>
         </div>
     </header>
 
+    <!-- ══════════════════════════════════════
+         HERO
+    ══════════════════════════════════════ -->
     <section class="hero">
+        <div class="hero-grid" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
         <div class="container">
-            <h2>Учи английский через<br>детективные расследования</h2>
-            <p>Забудь про скучные упражнения. Разговаривай с AI-персонажами, раскрывай преступления и учи язык в контексте.</p>
-            <a href="https://t.me/LingoMojo_bot?start=5t55l3ttnd" class="cta-button large">Начать расследование →</a>
+            <div class="hero-eyebrow"
+                 data-ru="🔍 AI-детективные истории"
+                 data-en="🔍 AI-powered detective stories"></div>
+
+            <h2 data-ru="Учи английский через<br>детективные&nbsp;<em>расследования</em>"
+                data-en="Learn English through<br>detective&nbsp;<em>investigations</em>"></h2>
+
+            <p data-ru="Забудь про скучные упражнения. Разговаривай с AI-персонажами, раскрывай преступления и учи язык в контексте."
+               data-en="Forget boring drills. Talk to AI characters, solve crimes, and learn language the way it's actually used."></p>
+
+            <div class="hero-cta">
+                <a href="https://t.me/LingoMojo_bot?start=5t55l3ttnd" class="cta-button large"
+                   data-ru="Начать расследование →"
+                   data-en="Start investigating →"></a>
+                <span class="hero-note"
+                      data-ru="Первое дело — бесплатно"
+                      data-en="First case is free"></span>
+            </div>
         </div>
     </section>
+
+    <!-- ══════════════════════════════════════
+         ABOUT
+    ══════════════════════════════════════ -->
+    <div class="divider"></div>
 
     <section id="about" class="about">
         <div class="container">
-            <h3>Почему традиционные курсы не работают?</h3>
+            <div class="section-label"
+                 data-ru="Проблема"
+                 data-en="The problem"></div>
+            <h3 class="section-title"
+                data-ru="Почему традиционные курсы не работают?"
+                data-en="Why traditional courses don't work?"></h3>
+
             <div class="problems">
                 <div class="problem-card">
                     <span class="icon">😴</span>
-                    <p>Грамматика без контекста - это скучно</p>
+                    <p data-ru="Грамматика без контекста — это скучно"
+                       data-en="Grammar without context is just boring"></p>
                 </div>
                 <div class="problem-card">
                     <span class="icon">😰</span>
-                    <p>Страх говорить на английском остается</p>
+                    <p data-ru="Страх говорить на английском остаётся"
+                       data-en="The fear of speaking never goes away"></p>
                 </div>
                 <div class="problem-card">
                     <span class="icon">🔄</span>
-                    <p>Застрял на intermediate plateau</p>
+                    <p data-ru="Застрял на intermediate plateau"
+                       data-en="Stuck on the intermediate plateau"></p>
                 </div>
             </div>
         </div>
     </section>
 
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════
+         FEATURES
+    ══════════════════════════════════════ -->
     <section id="features" class="features">
         <div class="container">
-            <h3>Как работает LingoMojo</h3>
+            <div class="section-label"
+                 data-ru="Как это работает"
+                 data-en="How it works"></div>
+            <h3 class="section-title"
+                data-ru="Как работает LingoMojo"
+                data-en="How LingoMojo works"></h3>
+
             <div class="feature-grid">
                 <div class="feature">
-                    <span class="number">1</span>
-                    <h4>Выбери детективную историю</h4>
-                    <p>От классических расследований до киберпреступлений</p>
+                    <div class="number">1</div>
+                    <h4 data-ru="Выбери детективную историю"
+                        data-en="Pick a detective story"></h4>
+                    <p data-ru="От классических расследований до киберпреступлений"
+                       data-en="From classic whodunits to cybercrime thrillers"></p>
                 </div>
                 <div class="feature">
-                    <span class="number">2</span>
-                    <h4>Общайся с AI-персонажами</h4>
-                    <p>Каждый NPC реагирует на твои реплики и помогает продвинуться</p>
+                    <div class="number">2</div>
+                    <h4 data-ru="Общайся с AI-персонажами"
+                        data-en="Talk to AI characters"></h4>
+                    <p data-ru="Каждый NPC реагирует на твои реплики и помогает продвинуться"
+                       data-en="Every NPC responds to what you say and pushes the story forward"></p>
                 </div>
                 <div class="feature">
-                    <span class="number">3</span>
-                    <h4>Получай моментальную обратную связь</h4>
-                    <p>AI исправляет ошибки и объясняет грамматику в контексте</p>
+                    <div class="number">3</div>
+                    <h4 data-ru="Получай моментальную обратную связь"
+                        data-en="Get instant feedback"></h4>
+                    <p data-ru="AI исправляет ошибки и объясняет грамматику в контексте"
+                       data-en="AI corrects mistakes and explains grammar in context, not in isolation"></p>
                 </div>
                 <div class="feature">
-                    <span class="number">4</span>
-                    <h4>Раскрой дело</h4>
-                    <p>Применяй английский для решения задач, а не просто заучивай</p>
+                    <div class="number">4</div>
+                    <h4 data-ru="Раскрой дело"
+                        data-en="Crack the case"></h4>
+                    <p data-ru="Применяй английский для решения задач, а не просто заучивай"
+                       data-en="Use English to solve real problems, not just memorise word lists"></p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ══════════════════════════════════════
+         FINAL CTA
+    ══════════════════════════════════════ -->
     <section class="cta-final">
         <div class="container">
-            <h3>Готов стать детективом?</h3>
-            <p>Начни своё первое расследование бесплатно</p>
-            <a href="https://t.me/LingoMojo_bot?start=zkjh6zgemr" class="cta-button large">Попробовать сейчас →</a>
+            <h3 data-ru="Готов стать детективом?"
+                data-en="Ready to become a detective?"></h3>
+            <p data-ru="Начни своё первое расследование бесплатно"
+               data-en="Start your first investigation for free"></p>
+            <a href="https://t.me/LingoMojo_bot?start=zkjh6zgemr" class="cta-button large"
+               data-ru="Попробовать сейчас →"
+               data-en="Try it now →"></a>
         </div>
     </section>
 
+    <!-- ══════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════ -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 LingoMojo. Учи английский через истории.</p>
+            <p data-ru="© 2025 LingoMojo. Учи английский через истории."
+               data-en="© 2025 LingoMojo. Learn English through stories."></p>
         </div>
     </footer>
+
+    <!-- ══════════════════════════════════════
+         LANGUAGE ENGINE
+    ══════════════════════════════════════ -->
+    <script>
+        function applyLang(lang) {
+            // Update all data-ru / data-en elements
+            document.querySelectorAll('[data-ru], [data-en]').forEach(el => {
+                const content = el.getAttribute('data-' + lang);
+                if (content === null) return;
+                // Use innerHTML so <br> and <em> render correctly
+                if (content.includes('<')) {
+                    el.innerHTML = content;
+                } else {
+                    el.textContent = content;
+                }
+            });
+
+            // Active state on toggle buttons
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+
+            // html lang attribute (good for SEO / screen readers)
+            document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
+
+            // Page title
+            document.title = lang === 'ru'
+                ? 'LingoMojo — Учи английский через детективные истории'
+                : 'LingoMojo — Learn English through detective stories';
+        }
+
+        function setLang(lang) {
+            window.__lang = lang;
+            localStorage.setItem('lingomojo-lang', lang);
+            applyLang(lang);
+        }
+
+        // Apply on page load using the value determined before render
+        applyLang(window.__lang);
+    </script>
+
 </body>
 </html>
