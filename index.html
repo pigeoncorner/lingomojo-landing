@@ -102,9 +102,6 @@
 
         nav a.nav-link:hover { color: var(--accent); }
 
-        <a href="/terms.html" class="nav-link" data-ru="Условия" data-en="Terms"></a>
-        <a href="/privacy.html" class="nav-link" data-ru="Конфиденциальность" data-en="Privacy"></a>
-        
         /* Language toggle */
         .lang-toggle {
             display: flex;
@@ -466,6 +463,14 @@
             font-size: 0.82rem;
         }
 
+        footer a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover { color: var(--accent); }
+
         /* ── Animations ── */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -495,7 +500,6 @@
     ══════════════════════════════════════ -->
     <script>
         (function () {
-            // Check saved preference first, then browser language
             const saved = localStorage.getItem('lingomojo-lang');
             const browserLang = navigator.language || navigator.userLanguage || '';
             const isRussian = saved ? saved === 'ru' : browserLang.startsWith('ru');
@@ -510,8 +514,10 @@
         <div class="container">
             <a href="#" class="logo">🔍 Lingo<span>Mojo</span></a>
             <nav>
-                <a href="#about"  class="nav-link" data-ru="О платформе"  data-en="About"></a>
-                <a href="#features" class="nav-link" data-ru="Возможности" data-en="Features"></a>
+                <a href="#about"    class="nav-link" data-ru="О платформе"  data-en="About"></a>
+                <a href="#features" class="nav-link" data-ru="Возможности"  data-en="Features"></a>
+                <a href="/terms.html"   class="nav-link" data-ru="Условия"       data-en="Terms"></a>
+                <a href="/privacy.html" class="nav-link" data-ru="Конфиденциальность" data-en="Privacy"></a>
 
                 <div class="lang-toggle" aria-label="Switch language">
                     <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
@@ -658,8 +664,14 @@
     ══════════════════════════════════════ -->
     <footer>
         <div class="container">
-            <p data-ru="© 2025 LingoMojo. Учи английский через истории."
-               data-en="© 2025 LingoMojo. Learn English through stories."></p>
+            <p>
+                <span data-ru="© 2025 LingoMojo. Учи английский через истории."
+                      data-en="© 2025 LingoMojo. Learn English through stories."></span>
+                &nbsp;·&nbsp;
+                <a href="/terms.html"   data-ru="Условия"            data-en="Terms of Service"></a>
+                &nbsp;·&nbsp;
+                <a href="/privacy.html" data-ru="Конфиденциальность"  data-en="Privacy Policy"></a>
+            </p>
         </div>
     </footer>
 
@@ -668,11 +680,9 @@
     ══════════════════════════════════════ -->
     <script>
         function applyLang(lang) {
-            // Update all data-ru / data-en elements
             document.querySelectorAll('[data-ru], [data-en]').forEach(el => {
                 const content = el.getAttribute('data-' + lang);
                 if (content === null) return;
-                // Use innerHTML so <br> and <em> render correctly
                 if (content.includes('<')) {
                     el.innerHTML = content;
                 } else {
@@ -680,14 +690,11 @@
                 }
             });
 
-            // Active state on toggle buttons
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
             document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
 
-            // html lang attribute (good for SEO / screen readers)
             document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
 
-            // Page title
             document.title = lang === 'ru'
                 ? 'LingoMojo — Учи английский через детективные истории'
                 : 'LingoMojo — Learn English through detective stories';
@@ -699,7 +706,6 @@
             applyLang(lang);
         }
 
-        // Apply on page load using the value determined before render
         applyLang(window.__lang);
     </script>
 
