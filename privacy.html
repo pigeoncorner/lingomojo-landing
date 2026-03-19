@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — LingoMojo</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0d0d1a;
+            --bg-mid: #13132b;
+            --bg-card: #1a1a35;
+            --accent: #4ecca3;
+            --accent-glow: rgba(78, 204, 163, 0.25);
+            --accent-dim: rgba(78, 204, 163, 0.12);
+            --text: #e8e8f0;
+            --text-muted: #8888aa;
+            --text-dim: #555577;
+            --border: rgba(78, 204, 163, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.35;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── Header ── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(13, 13, 26, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav { display: flex; gap: 2rem; align-items: center; }
+
+        nav a.nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a.nav-link:hover,
+        nav a.nav-link.active { color: var(--accent); }
+
+        .cta-button {
+            background: var(--accent);
+            color: #0d0d1a;
+            padding: 0.65rem 1.4rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.02em;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--accent-glow);
+        }
+
+        /* ── Page header ── */
+        .page-header {
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .page-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 4px 12px;
+            margin-bottom: 1.2rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* ── Policy content wrapper ── */
+        .policy-wrapper {
+            padding: 3rem 0 5rem;
+            max-width: 800px;
+        }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        footer p { color: var(--text-dim); font-size: 0.82rem; }
+
+        footer a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            nav a.nav-link { display: none; }
+            header .container { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <a href="/" class="logo">🔍 Lingo<span>Mojo</span></a>
+            <nav>
+                <a href="/" class="nav-link">Home</a>
+                <a href="/terms.html" class="nav-link">Terms</a>
+                <a href="/privacy.html" class="nav-link active">Privacy</a>
+                <a href="https://t.me/LingoMojo_bot?start=abzra8fa8s" class="cta-button">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-eyebrow">🔒 Legal</div>
+            <h1>Privacy Policy</h1>
+            <p>Last updated: March 19, 2026</p>
+        </div>
+    </section>
+
+    <!-- TERMLY EMBED -->
+    <div class="container">
+        <div class="policy-wrapper">
+            <div name="termly-embed" data-id="1f8eec20-cd49-410e-86c3-a86fc996ec6f"></div>
+            <script type="text/javascript">(function(d, s, id) {
+              var js, tjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "https://app.termly.io/embed-policy.min.js";
+              tjs.parentNode.insertBefore(js, tjs);
+            }(document, 'script', 'termly-jssdk'));</script>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© 2025 LingoMojo &nbsp;·&nbsp; <a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp; <a href="/privacy.html">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
