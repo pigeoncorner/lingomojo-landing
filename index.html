@@ -17,16 +17,16 @@
 
     <style>
         :root {
-            --bg-dark: #0d0d1a;
-            --bg-mid: #13132b;
-            --bg-card: #1a1a35;
-            --accent: #4ecca3;
-            --accent-glow: rgba(78, 204, 163, 0.25);
-            --accent-dim: rgba(78, 204, 163, 0.12);
-            --text: #e8e8f0;
-            --text-muted: #8888aa;
-            --text-dim: #555577;
-            --border: rgba(78, 204, 163, 0.15);
+            --bg-dark:    #f5f5f0;
+            --bg-mid:     #eeeee8;
+            --bg-card:    #ffffff;
+            --accent:     #0a8a65;
+            --accent-glow: rgba(10, 138, 101, 0.2);
+            --accent-dim:  rgba(10, 138, 101, 0.08);
+            --text:       #111118;
+            --text-muted: #555566;
+            --text-dim:   #999aaa;
+            --border:     rgba(10, 138, 101, 0.18);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,7 +41,7 @@
             overflow-x: hidden;
         }
 
-        /* ── Noise overlay ── */
+        /* ── Subtle noise overlay ── */
         body::before {
             content: '';
             position: fixed;
@@ -49,7 +49,7 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 999;
-            opacity: 0.35;
+            opacity: 0.2;
         }
 
         .container {
@@ -63,7 +63,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(13, 13, 26, 0.85);
+            background: rgba(245, 245, 240, 0.88);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
         }
@@ -107,7 +107,7 @@
             display: flex;
             align-items: center;
             gap: 2px;
-            background: var(--bg-card);
+            background: var(--bg-mid);
             border: 1px solid var(--border);
             border-radius: 20px;
             padding: 3px;
@@ -130,13 +130,13 @@
 
         .lang-btn.active {
             background: var(--accent);
-            color: #0d0d1a;
+            color: #ffffff;
         }
 
         /* CTA Button */
         .cta-button {
             background: var(--accent);
-            color: #0d0d1a;
+            color: #ffffff;
             padding: 0.65rem 1.4rem;
             border-radius: 8px;
             text-decoration: none;
@@ -168,7 +168,6 @@
             padding: 5rem 0;
         }
 
-        /* Radial glow behind hero */
         .hero::after {
             content: '';
             position: absolute;
@@ -177,7 +176,7 @@
             transform: translateX(-50%);
             width: 700px;
             height: 700px;
-            background: radial-gradient(circle, rgba(78,204,163,0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(10,138,101,0.06) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -230,7 +229,7 @@
             right: 0;
             height: 3px;
             background: var(--accent);
-            opacity: 0.4;
+            opacity: 0.3;
             border-radius: 2px;
         }
 
@@ -258,7 +257,7 @@
             color: var(--text-dim);
         }
 
-        /* Floating grid lines decoration */
+        /* Floating grid decoration */
         .hero-grid {
             position: absolute;
             right: -80px;
@@ -268,7 +267,7 @@
             grid-template-columns: repeat(5, 60px);
             grid-template-rows: repeat(5, 60px);
             gap: 12px;
-            opacity: 0.07;
+            opacity: 0.09;
             pointer-events: none;
         }
 
@@ -315,12 +314,13 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 2rem;
-            transition: border-color 0.3s, transform 0.3s;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
         }
 
         .problem-card:hover {
-            border-color: rgba(78, 204, 163, 0.4);
+            border-color: rgba(10, 138, 101, 0.35);
             transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(10, 138, 101, 0.08);
         }
 
         .problem-card .icon {
@@ -334,7 +334,7 @@
             font-size: 0.95rem;
         }
 
-        /* Divider line */
+        /* Divider */
         .divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--border), transparent);
@@ -342,9 +342,7 @@
         }
 
         /* ── Features ── */
-        .features {
-            padding: 6rem 0;
-        }
+        .features { padding: 6rem 0; }
 
         .feature-grid {
             display: grid;
@@ -360,20 +358,19 @@
             border-radius: 16px;
             position: relative;
             overflow: hidden;
-            transition: border-color 0.3s, transform 0.3s;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
         }
 
         .feature:hover {
-            border-color: rgba(78, 204, 163, 0.4);
+            border-color: rgba(10, 138, 101, 0.35);
             transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(10, 138, 101, 0.08);
         }
 
         .feature::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
             opacity: 0;
@@ -419,17 +416,17 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            background: var(--bg-mid);
         }
 
         .cta-final::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(78,204,163,0.07) 0%, transparent 65%);
+            background: radial-gradient(circle, rgba(10,138,101,0.07) 0%, transparent 65%);
             pointer-events: none;
         }
 
@@ -456,12 +453,10 @@
             border-top: 1px solid var(--border);
             padding: 2rem 0;
             text-align: center;
+            background: var(--bg-dark);
         }
 
-        footer p {
-            color: var(--text-dim);
-            font-size: 0.82rem;
-        }
+        footer p { color: var(--text-dim); font-size: 0.82rem; }
 
         footer a {
             color: var(--text-dim);
@@ -480,24 +475,16 @@
         /* ── Mobile ── */
         @media (max-width: 768px) {
             nav a.nav-link { display: none; }
-
             header .container { padding: 0 20px; }
-
             .hero { min-height: auto; padding: 4rem 0; }
-
             .hero-grid { display: none; }
-
             .hero-cta { flex-direction: column; align-items: flex-start; }
-
             .cta-button.large { width: 100%; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ══════════════════════════════════════
-         LANGUAGE DETECTION + TOGGLE SCRIPT
-    ══════════════════════════════════════ -->
     <script>
         (function () {
             const saved = localStorage.getItem('lingomojo-lang');
@@ -507,17 +494,15 @@
         })();
     </script>
 
-    <!-- ══════════════════════════════════════
-         HEADER
-    ══════════════════════════════════════ -->
+    <!-- HEADER -->
     <header>
         <div class="container">
             <a href="#" class="logo">🔍 Lingo<span>Mojo</span></a>
             <nav>
-                <a href="#about"    class="nav-link" data-ru="О платформе"  data-en="About"></a>
-                <a href="#features" class="nav-link" data-ru="Возможности"  data-en="Features"></a>
-                <a href="/terms.html"   class="nav-link" data-ru="Условия"       data-en="Terms"></a>
-                <a href="/privacy.html" class="nav-link" data-ru="Конфиденциальность" data-en="Privacy"></a>
+                <a href="#about"        class="nav-link" data-ru="О платформе"        data-en="About"></a>
+                <a href="#features"     class="nav-link" data-ru="Возможности"         data-en="Features"></a>
+                <a href="/terms.html"   class="nav-link" data-ru="Условия"             data-en="Terms"></a>
+                <a href="/privacy.html" class="nav-link" data-ru="Конфиденциальность"  data-en="Privacy"></a>
 
                 <div class="lang-toggle" aria-label="Switch language">
                     <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
@@ -530,9 +515,7 @@
         </div>
     </header>
 
-    <!-- ══════════════════════════════════════
-         HERO
-    ══════════════════════════════════════ -->
+    <!-- HERO -->
     <section class="hero">
         <div class="hero-grid" aria-hidden="true">
             <span></span><span></span><span></span><span></span><span></span>
@@ -563,16 +546,12 @@
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         ABOUT
-    ══════════════════════════════════════ -->
     <div class="divider"></div>
 
+    <!-- ABOUT -->
     <section id="about" class="about">
         <div class="container">
-            <div class="section-label"
-                 data-ru="Проблема"
-                 data-en="The problem"></div>
+            <div class="section-label" data-ru="Проблема" data-en="The problem"></div>
             <h3 class="section-title"
                 data-ru="Почему традиционные курсы не работают?"
                 data-en="Why traditional courses don't work?"></h3>
@@ -599,14 +578,10 @@
 
     <div class="divider"></div>
 
-    <!-- ══════════════════════════════════════
-         FEATURES
-    ══════════════════════════════════════ -->
+    <!-- FEATURES -->
     <section id="features" class="features">
         <div class="container">
-            <div class="section-label"
-                 data-ru="Как это работает"
-                 data-en="How it works"></div>
+            <div class="section-label" data-ru="Как это работает" data-en="How it works"></div>
             <h3 class="section-title"
                 data-ru="Как работает LingoMojo"
                 data-en="How LingoMojo works"></h3>
@@ -614,29 +589,25 @@
             <div class="feature-grid">
                 <div class="feature">
                     <div class="number">1</div>
-                    <h4 data-ru="Выбери детективную историю"
-                        data-en="Pick a detective story"></h4>
+                    <h4 data-ru="Выбери детективную историю" data-en="Pick a detective story"></h4>
                     <p data-ru="От классических расследований до киберпреступлений"
                        data-en="From classic whodunits to cybercrime thrillers"></p>
                 </div>
                 <div class="feature">
                     <div class="number">2</div>
-                    <h4 data-ru="Общайся с AI-персонажами"
-                        data-en="Talk to AI characters"></h4>
+                    <h4 data-ru="Общайся с AI-персонажами" data-en="Talk to AI characters"></h4>
                     <p data-ru="Каждый NPC реагирует на твои реплики и помогает продвинуться"
                        data-en="Every NPC responds to what you say and pushes the story forward"></p>
                 </div>
                 <div class="feature">
                     <div class="number">3</div>
-                    <h4 data-ru="Получай моментальную обратную связь"
-                        data-en="Get instant feedback"></h4>
+                    <h4 data-ru="Получай моментальную обратную связь" data-en="Get instant feedback"></h4>
                     <p data-ru="AI исправляет ошибки и объясняет грамматику в контексте"
                        data-en="AI corrects mistakes and explains grammar in context, not in isolation"></p>
                 </div>
                 <div class="feature">
                     <div class="number">4</div>
-                    <h4 data-ru="Раскрой дело"
-                        data-en="Crack the case"></h4>
+                    <h4 data-ru="Раскрой дело" data-en="Crack the case"></h4>
                     <p data-ru="Применяй английский для решения задач, а не просто заучивай"
                        data-en="Use English to solve real problems, not just memorise word lists"></p>
                 </div>
@@ -644,13 +615,10 @@
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         FINAL CTA
-    ══════════════════════════════════════ -->
+    <!-- FINAL CTA -->
     <section class="cta-final">
         <div class="container">
-            <h3 data-ru="Готов стать детективом?"
-                data-en="Ready to become a detective?"></h3>
+            <h3 data-ru="Готов стать детективом?" data-en="Ready to become a detective?"></h3>
             <p data-ru="Начни своё первое расследование бесплатно"
                data-en="Start your first investigation for free"></p>
             <a href="https://t.me/LingoMojo_bot?start=zkjh6zgemr" class="cta-button large"
@@ -659,25 +627,21 @@
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         FOOTER
-    ══════════════════════════════════════ -->
+    <!-- FOOTER -->
     <footer>
         <div class="container">
             <p>
                 <span data-ru="© 2025 LingoMojo. Учи английский через истории."
                       data-en="© 2025 LingoMojo. Learn English through stories."></span>
                 &nbsp;·&nbsp;
-                <a href="/terms.html"   data-ru="Условия"            data-en="Terms of Service"></a>
+                <a href="/terms.html"   data-ru="Условия"           data-en="Terms of Service"></a>
                 &nbsp;·&nbsp;
-                <a href="/privacy.html" data-ru="Конфиденциальность"  data-en="Privacy Policy"></a>
+                <a href="/privacy.html" data-ru="Конфиденциальность" data-en="Privacy Policy"></a>
             </p>
         </div>
     </footer>
 
-    <!-- ══════════════════════════════════════
-         LANGUAGE ENGINE
-    ══════════════════════════════════════ -->
+    <!-- LANGUAGE ENGINE -->
     <script>
         function applyLang(lang) {
             document.querySelectorAll('[data-ru], [data-en]').forEach(el => {
@@ -689,12 +653,9 @@
                     el.textContent = content;
                 }
             });
-
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
             document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
-
             document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
-
             document.title = lang === 'ru'
                 ? 'LingoMojo — Учи английский через детективные истории'
                 : 'LingoMojo — Learn English through detective stories';
