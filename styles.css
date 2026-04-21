@@ -314,7 +314,7 @@ nav a.nav-link:hover { color: var(--accent); }
     height: 100vh;
     display: flex;
     align-items: flex-start;
-    padding: 5rem 0 2rem;
+    padding: 2rem 0;
     background: var(--bg-dark);
     scroll-snap-align: start;
 }
@@ -404,7 +404,7 @@ nav a.nav-link:hover { color: var(--accent); }
     height: 100vh;
     display: flex;
     align-items: flex-start;
-    padding: 5rem 0 2rem;
+    padding: 2rem 0;
     background: var(--bg-mid);
     scroll-snap-align: start;
 }
