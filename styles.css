@@ -110,6 +110,8 @@ nav a.nav-link {
 nav a:hover,
 nav a.nav-link:hover { color: var(--accent); }
 
+nav a.cta-button:hover { color: #ffffff; }
+
 /* ── CTA Button ── */
 .cta-button {
     background: var(--accent);
