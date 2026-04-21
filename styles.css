@@ -131,12 +131,13 @@ nav a.nav-link:hover { color: var(--accent); }
 
 /* ── Hero ── */
 .hero {
-    min-height: 88vh;
+    height: calc(100vh - 64px);
+    min-height: 560px;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
-    padding: 5rem 0;
+    padding: 2rem 0;
     background: var(--bg-dark);
 }
 
@@ -160,6 +161,7 @@ nav a.nav-link:hover { color: var(--accent); }
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+    height: 100%;
 }
 
 .hero-text { display: flex; flex-direction: column; }
@@ -173,6 +175,9 @@ nav a.nav-link:hover { color: var(--accent); }
 .hero-screenshot {
     width: 100%;
     max-width: 480px;
+    max-height: calc(100vh - 64px - 4rem);
+    object-fit: contain;
+    object-position: top;
     border-radius: 12px;
     box-shadow: 0 24px 64px rgba(0,0,0,0.12), 0 4px 16px rgba(254,119,1,0.1);
     opacity: 0;
