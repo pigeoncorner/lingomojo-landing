@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LingoMojo</title>
+    <title>LingoMojo — Learn English through jokes &amp; slang</title>
+    <meta name="description" content="LingoMojo Chrome extension explains real slang and jokes on any webpage instantly. 20 free analyses per day. No account needed.">
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -18,32 +19,20 @@
 </head>
 <body>
 
-    <script>
-        (function () {
-            const saved = localStorage.getItem('lingomojo-lang');
-            const browserLang = navigator.language || navigator.userLanguage || '';
-            const isRussian = saved ? saved === 'ru' : browserLang.startsWith('ru');
-            window.__lang = isRussian ? 'ru' : 'en';
-        })();
-    </script>
-
     <!-- HEADER -->
     <header>
         <div class="container">
-            <a href="#" class="logo">🔍 Lingo<span>Mojo</span></a>
+            <a href="/" class="logo">
+                <img src="/favicon.svg" alt="" class="logo-icon">
+                Lingo<span>Mojo</span>
+            </a>
             <nav>
-                <a href="#about"        class="nav-link" data-ru="О платформе"       data-en="About"></a>
-                <a href="#features"     class="nav-link" data-ru="Возможности"        data-en="Features"></a>
-                <a href="/terms.html"   class="nav-link" data-ru="Условия"            data-en="Terms"></a>
-                <a href="/privacy.html" class="nav-link" data-ru="Конфиденциальность" data-en="Privacy"></a>
-
-                <div class="lang-toggle" aria-label="Switch language">
-                    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
-                    <button class="lang-btn" id="btn-ru" onclick="setLang('ru')">RU</button>
-                </div>
-
-                <a href="https://t.me/LingoMojo_bot?start=abzra8fa8s" class="cta-button"
-                   data-ru="Начать" data-en="Get Started"></a>
+                <a href="#how-it-works" class="nav-link">How it works</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="/terms.html" class="nav-link">Terms</a>
+                <a href="/privacy.html" class="nav-link">Privacy</a>
+                <a href="https://chromewebstore.google.com/detail/lingomojo-%E2%80%94-jokes-and-sla/cbhnfalfcehnldongaeojnlaheihpejl"
+                   class="cta-button" target="_blank" rel="noopener">Add to Chrome</a>
             </nav>
         </div>
     </header>
@@ -57,93 +46,93 @@
             <span></span><span></span><span></span><span></span><span></span>
             <span></span><span></span><span></span><span></span><span></span>
         </div>
-        <div class="container">
-            <div class="hero-eyebrow"
-                 data-ru="🔍 AI-детективные истории"
-                 data-en="🔍 AI-powered detective stories"></div>
-
-            <h2 data-ru="Учи английский через<br>детективные&nbsp;<em>расследования</em>"
-                data-en="Learn English through<br>detective&nbsp;<em>investigations</em>"></h2>
-
-            <p data-ru="Забудь про скучные упражнения. Разговаривай с AI-персонажами, раскрывай преступления и учи язык в контексте."
-               data-en="Forget boring drills. Talk to AI characters, solve crimes, and learn language the way it's actually used."></p>
-
-            <div class="hero-cta">
-                <a href="https://t.me/LingoMojo_bot?start=5t55l3ttnd" class="cta-button large"
-                   data-ru="Начать расследование →"
-                   data-en="Start investigating →"></a>
-                <span class="hero-note"
-                      data-ru="Первое дело — бесплатно"
-                      data-en="First case is free"></span>
+        <div class="container hero-layout">
+            <div class="hero-text">
+                <div class="hero-eyebrow">🧩 Chrome Extension</div>
+                <h2>Learn English through <em>jokes&nbsp;&amp;&nbsp;slang</em></h2>
+                <p>LingoMojo spots real slang and jokes on any webpage and explains them instantly — no tab switching, no dictionaries, no boring drills.</p>
+                <div class="hero-cta">
+                    <a href="https://chromewebstore.google.com/detail/lingomojo-%E2%80%94-jokes-and-sla/cbhnfalfcehnldongaeojnlaheihpejl"
+                       class="cta-button large" target="_blank" rel="noopener">Add to Chrome — it's free →</a>
+                    <span class="hero-note">20 free analyses per day · No account needed</span>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="/ext_01.png" alt="LingoMojo extension explaining a joke on a webpage" class="hero-screenshot">
             </div>
         </div>
     </section>
 
     <div class="divider"></div>
 
-    <!-- ABOUT -->
-    <section id="about" class="about">
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="features">
         <div class="container">
-            <div class="section-label" data-ru="Проблема" data-en="The problem"></div>
-            <h3 class="section-title"
-                data-ru="Почему традиционные курсы не работают?"
-                data-en="Why traditional courses don't work?"></h3>
-
-            <div class="problems">
-                <div class="problem-card">
-                    <span class="icon">😴</span>
-                    <p data-ru="Грамматика без контекста — это скучно"
-                       data-en="Grammar without context is just boring"></p>
-                </div>
-                <div class="problem-card">
-                    <span class="icon">😰</span>
-                    <p data-ru="Страх говорить на английском остаётся"
-                       data-en="The fear of speaking never goes away"></p>
-                </div>
-                <div class="problem-card">
-                    <span class="icon">🔄</span>
-                    <p data-ru="Застрял на intermediate plateau"
-                       data-en="Stuck on the intermediate plateau"></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- FEATURES -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-label" data-ru="Как это работает" data-en="How it works"></div>
-            <h3 class="section-title"
-                data-ru="Как работает LingoMojo"
-                data-en="How LingoMojo works"></h3>
-
-            <div class="feature-grid">
+            <div class="section-label">How it works</div>
+            <h3 class="section-title">Three steps to real English</h3>
+            <div class="feature-grid cols-3">
                 <div class="feature">
                     <div class="number">1</div>
-                    <h4 data-ru="Выбери детективную историю" data-en="Pick a detective story"></h4>
-                    <p data-ru="От классических расследований до киберпреступлений"
-                       data-en="From classic whodunits to cybercrime thrillers"></p>
+                    <h4>Browse as usual</h4>
+                    <p>Read Reddit, Twitter, articles — anything. LingoMojo runs quietly in the background.</p>
                 </div>
                 <div class="feature">
                     <div class="number">2</div>
-                    <h4 data-ru="Общайся с AI-персонажами" data-en="Talk to AI characters"></h4>
-                    <p data-ru="Каждый NPC реагирует на твои реплики и помогает продвинуться"
-                       data-en="Every NPC responds to what you say and pushes the story forward"></p>
+                    <h4>Spot the slang</h4>
+                    <p>Click any phrase you don't get. LingoMojo explains the joke, the slang, or the cultural reference — in plain English.</p>
                 </div>
                 <div class="feature">
                     <div class="number">3</div>
-                    <h4 data-ru="Получай моментальную обратную связь" data-en="Get instant feedback"></h4>
-                    <p data-ru="AI исправляет ошибки и объясняет грамматику в контексте"
-                       data-en="AI corrects mistakes and explains grammar in context, not in isolation"></p>
+                    <h4>Remember it for real</h4>
+                    <p>Context beats flashcards. When you laugh at a joke you just understood, you don't forget it.</p>
                 </div>
-                <div class="feature">
-                    <div class="number">4</div>
-                    <h4 data-ru="Раскрой дело" data-en="Crack the case"></h4>
-                    <p data-ru="Применяй английский для решения задач, а не просто заучивай"
-                       data-en="Use English to solve real problems, not just memorise word lists"></p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PRICING -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-label">Pricing</div>
+            <h3 class="section-title">Simple, honest pricing</h3>
+            <div class="pricing-grid">
+
+                <div class="pricing-card">
+                    <div class="plan-name">Free</div>
+                    <div class="plan-price">
+                        <span class="price-amount">$0</span>
+                    </div>
+                    <div class="plan-tagline">Forever free · No card needed</div>
+                    <ul class="plan-features">
+                        <li class="feat-check">20 analyses per day</li>
+                        <li class="feat-check">Slang &amp; joke explanations</li>
+                        <li class="feat-check">Works on any webpage</li>
+                        <li class="feat-cross">Unlimited analyses</li>
+                    </ul>
+                    <a href="https://chromewebstore.google.com/detail/lingomojo-%E2%80%94-jokes-and-sla/cbhnfalfcehnldongaeojnlaheihpejl"
+                       class="plan-cta plan-cta--outline" target="_blank" rel="noopener">Add to Chrome</a>
                 </div>
+
+                <div class="pricing-card pricing-card--featured">
+                    <div class="plan-badge">Most popular</div>
+                    <div class="plan-name">Premium</div>
+                    <div class="plan-price">
+                        <span class="price-amount">$4.95</span>
+                        <span class="price-period">/ month</span>
+                    </div>
+                    <div class="plan-tagline">Or $14.95 / year — save 75%</div>
+                    <ul class="plan-features">
+                        <li class="feat-check">Unlimited analyses</li>
+                        <li class="feat-check">Slang &amp; joke explanations</li>
+                        <li class="feat-check">Works on any webpage</li>
+                        <li class="feat-check">Priority support</li>
+                    </ul>
+                    <a href="https://chromewebstore.google.com/detail/lingomojo-%E2%80%94-jokes-and-sla/cbhnfalfcehnldongaeojnlaheihpejl"
+                       class="plan-cta plan-cta--primary" target="_blank" rel="noopener">Get Premium →</a>
+                </div>
+
             </div>
         </div>
     </section>
@@ -151,12 +140,10 @@
     <!-- FINAL CTA -->
     <section class="cta-final">
         <div class="container">
-            <h3 data-ru="Готов стать детективом?" data-en="Ready to become a detective?"></h3>
-            <p data-ru="Начни своё первое расследование бесплатно"
-               data-en="Start your first investigation for free"></p>
-            <a href="https://t.me/LingoMojo_bot?start=zkjh6zgemr" class="cta-button large"
-               data-ru="Попробовать сейчас →"
-               data-en="Try it now →"></a>
+            <h3>Start understanding real English today</h3>
+            <p>Install the extension and get 20 free analyses every day.</p>
+            <a href="https://chromewebstore.google.com/detail/lingomojo-%E2%80%94-jokes-and-sla/cbhnfalfcehnldongaeojnlaheihpejl"
+               class="cta-button large" target="_blank" rel="noopener">Add to Chrome — it's free →</a>
         </div>
     </section>
 
@@ -164,44 +151,14 @@
     <footer>
         <div class="container">
             <p>
-                <span data-ru="© 2025 LingoMojo. Учи английский через истории."
-                      data-en="© 2025 LingoMojo. Learn English through stories."></span>
+                © 2025 LingoMojo. Learn English through jokes &amp; slang.
                 &nbsp;·&nbsp;
-                <a href="/terms.html"   data-ru="Условия"           data-en="Terms of Service"></a>
+                <a href="/terms.html">Terms of Service</a>
                 &nbsp;·&nbsp;
-                <a href="/privacy.html" data-ru="Конфиденциальность" data-en="Privacy Policy"></a>
+                <a href="/privacy.html">Privacy Policy</a>
             </p>
         </div>
     </footer>
-
-    <!-- LANGUAGE ENGINE -->
-    <script>
-        function applyLang(lang) {
-            document.querySelectorAll('[data-ru], [data-en]').forEach(el => {
-                const content = el.getAttribute('data-' + lang);
-                if (content === null) return;
-                if (content.includes('<')) {
-                    el.innerHTML = content;
-                } else {
-                    el.textContent = content;
-                }
-            });
-            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-            document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
-            document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
-            document.title = lang === 'ru'
-                ? 'LingoMojo — Учи английский через детективные истории'
-                : 'LingoMojo — Learn English through detective stories';
-        }
-
-        function setLang(lang) {
-            window.__lang = lang;
-            localStorage.setItem('lingomojo-lang', lang);
-            applyLang(lang);
-        }
-
-        applyLang(window.__lang);
-    </script>
 
 </body>
 </html>
