@@ -313,8 +313,8 @@ nav a.nav-link:hover { color: var(--accent); }
 .features {
     height: 100vh;
     display: flex;
-    align-items: center;
-    padding: 4rem 0;
+    align-items: flex-start;
+    padding: 5rem 0 2rem;
     background: var(--bg-dark);
     scroll-snap-align: start;
 }
@@ -403,8 +403,8 @@ nav a.nav-link:hover { color: var(--accent); }
 .pricing {
     height: 100vh;
     display: flex;
-    align-items: center;
-    padding: 4rem 0;
+    align-items: flex-start;
+    padding: 5rem 0 2rem;
     background: var(--bg-mid);
     scroll-snap-align: start;
 }
