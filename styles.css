@@ -651,6 +651,57 @@ nav a.cta-button:hover { color: #ffffff; }
     max-width: 800px;
 }
 
+.policy-content h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+    color: var(--text);
+}
+
+.policy-content .policy-meta {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+}
+
+.policy-content h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+}
+
+.policy-content p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+    line-height: 1.7;
+}
+
+.policy-content ul {
+    margin: 0.4rem 0 0.8rem 1.4rem;
+}
+
+.policy-content ul li {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 0.3rem;
+}
+
+.policy-content a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.policy-content a:hover { text-decoration: underline; }
+
 /* ── Footer ── */
 footer {
     border-top: 1px solid var(--border-neutral);
