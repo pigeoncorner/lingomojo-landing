@@ -621,9 +621,17 @@ nav a.cta-button:hover { color: #ffffff; }
     box-shadow: 0 6px 20px var(--accent-glow);
 }
 
+/* ── Final CTA + Footer snap wrapper ── */
+.cta-footer-snap {
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+}
+
 /* ── Final CTA ── */
 .cta-final {
-    height: 100vh;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -632,7 +640,6 @@ nav a.cta-button:hover { color: #ffffff; }
     overflow: hidden;
     background: var(--bg-dark);
     color: var(--text);
-    scroll-snap-align: start;
 }
 
 .cta-final::before {
