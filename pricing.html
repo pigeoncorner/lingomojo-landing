@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing — LingoMojo</title>
+    <meta name="description" content="Simple, honest pricing for LingoMojo. Free plan with 5 analyses per day. Pro plans with unlimited analyses starting at $2.49/month.">
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+
+    <style>
+        html { scroll-snap-type: none; }
+
+        .pricing-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 72px 24px 80px;
+        }
+
+        /* ── HOOK ─────────────────────────────────────── */
+        .hook {
+            text-align: center;
+            max-width: 560px;
+            margin-bottom: 56px;
+        }
+
+        .hook-eyebrow {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+
+        .hook h1 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(28px, 5vw, 42px);
+            line-height: 1.15;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .hook h1 em {
+            font-style: normal;
+            color: var(--accent);
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .hook h1 em::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0;
+            bottom: -3px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            opacity: 0.35;
+        }
+
+        .hook p {
+            font-size: 17px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .hook p strong {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        /* ── CARDS ────────────────────────────────────── */
+        .pr-cards {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .pr-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 32px 28px 28px;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 240px;
+            max-width: 280px;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .pr-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+
+        .pr-card.featured {
+            background: var(--text);
+            border-color: var(--text);
+            color: #fff;
+        }
+
+        .pr-card.featured .pr-price-label,
+        .pr-card.featured .pr-desc,
+        .pr-card.featured .limit-sub,
+        .pr-card.featured .pr-feature { color: rgba(255,255,255,0.6); }
+
+        .pr-card.featured .pr-name,
+        .pr-card.featured .pr-price { color: #fff; }
+
+        .pr-card.featured .pr-divider { background: rgba(255,255,255,0.1); }
+
+        .pr-card.annual { border-color: var(--green); }
+
+        /* Badge */
+        .pr-badge {
+            position: absolute;
+            top: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .pr-card.annual .pr-badge { background: var(--green); }
+
+        /* Card content */
+        .pr-name {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .pr-price {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 40px;
+            line-height: 1;
+            color: var(--text);
+            display: flex;
+            align-items: flex-start;
+            gap: 2px;
+            margin-bottom: 4px;
+        }
+
+        .pr-price sup { font-size: 20px; margin-top: 6px; }
+
+        .pr-price-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .pr-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 20px 0;
+        }
+
+        /* Limit highlight */
+        .limit-box {
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .limit-box.free-limit {
+            background: rgba(0,0,0,0.05);
+            color: var(--text-muted);
+        }
+
+        .limit-box.featured-limit {
+            background: rgba(254,119,1,0.15);
+            color: var(--accent);
+        }
+
+        .limit-box.annual-limit {
+            background: rgba(0,107,38,0.1);
+            color: var(--green);
+        }
+
+        .limit-main {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 18px;
+            line-height: 1.2;
+        }
+
+        .limit-sub {
+            font-size: 12px;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        /* Features list */
+        .pr-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text);
+            padding: 5px 0;
+        }
+
+        .pr-feature .icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            opacity: 0.7;
+        }
+
+        /* CTA button */
+        .pr-cta { margin-top: auto; padding-top: 24px; }
+
+        .pr-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 13px 20px;
+            border-radius: 10px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+            transition: opacity 0.15s, transform 0.15s;
+        }
+
+        .pr-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+        .pr-btn:active { transform: translateY(0); }
+
+        .pr-btn.btn-free    { background: rgba(0,0,0,0.07); color: var(--text-muted); }
+        .pr-btn.btn-monthly { background: var(--accent); color: #fff; }
+        .pr-btn.btn-annual  { background: var(--green);  color: #fff; }
+
+        /* ── SHARED FEATURES ROW ──────────────────────── */
+        .shared {
+            margin-top: 36px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 20px;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .shared-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            width: 100%;
+            margin-bottom: 4px;
+            font-style: italic;
+        }
+
+        .shared-item {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .shared-item::before {
+            content: '✓';
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        @media (max-width: 640px) {
+            .pr-cards { flex-direction: column; align-items: center; }
+            .pr-card  { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="/" class="logo"><img src="/favicon.svg" alt="" class="logo-icon"><span class="logo-wordmark">Lingo<span>Mojo</span></span></a>
+            <nav>
+                <a href="/" class="nav-link">Home</a>
+                <a href="/pricing.html" class="nav-link active">Pricing</a>
+                <div class="nav-dropdown">
+                    <span class="nav-link nav-dropdown-trigger">Terms ▾</span>
+                    <div class="nav-dropdown-menu">
+                        <div class="nav-dropdown-inner">
+                            <a href="/terms.html">Terms of Service</a>
+                            <a href="/refund.html">Refund Policy</a>
+                            <a href="/privacy.html">Privacy Policy</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://chromewebstore.google.com/detail/lingomojo-%E2%80%94-jokes-and-sla/cbhnfalfcehnldongaeojnlaheihpejl"
+                   class="cta-button" target="_blank" rel="noopener">Add to Chrome</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pricing-page">
+
+        <!-- HOOK -->
+        <div class="hook">
+            <span class="hook-eyebrow">Pricing</span>
+            <h1>Still guessing what<br>that <em>joke</em> meant?</h1>
+            <p>
+                Get unlimited explanations for just <strong>$4.98/month</strong> —<br>
+                or pay once a year and <strong>save 50%</strong>.
+            </p>
+        </div>
+
+        <!-- CARDS -->
+        <div class="pr-cards">
+
+            <!-- FREE -->
+            <div class="pr-card">
+                <div class="pr-name">Free</div>
+                <div class="pr-price"><sup>$</sup>0</div>
+                <div class="pr-price-label">forever</div>
+
+                <div class="pr-divider"></div>
+
+                <div class="limit-box free-limit">
+                    <div class="limit-main">5 joke analyses</div>
+                    <div class="limit-sub">per day</div>
+                </div>
+
+                <div class="pr-feature">
+                    <svg class="icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Slang &amp; idiom lookups
+                </div>
+                <div class="pr-feature">
+                    <svg class="icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Cultural context
+                </div>
+                <div class="pr-feature">
+                    <svg class="icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    YouTube &amp; web
+                </div>
+
+                <div class="pr-cta">
+                    <a href="https://chromewebstore.google.com/detail/lingomojo-%E2%80%94-jokes-and-sla/cbhnfalfcehnldongaeojnlaheihpejl"
+                       class="pr-btn btn-free" target="_blank" rel="noopener">Get started free</a>
+                </div>
+            </div>
+
+            <!-- PRO MONTHLY (featured) -->
+            <div class="pr-card featured">
+                <div class="pr-badge">Most popular</div>
+                <div class="pr-name">Pro Monthly</div>
+                <div class="pr-price"><sup>$</sup>4.98</div>
+                <div class="pr-price-label">per month · cancel anytime</div>
+
+                <div class="pr-divider"></div>
+
+                <div class="limit-box featured-limit">
+                    <div class="limit-main">Unlimited analyses</div>
+                    <div class="limit-sub">no daily cap</div>
+                </div>
+
+                <div class="pr-feature">
+                    <svg class="icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Slang &amp; idiom lookups
+                </div>
+                <div class="pr-feature">
+                    <svg class="icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Cultural context
+                </div>
+                <div class="pr-feature">
+                    <svg class="icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    YouTube &amp; web
+                </div>
+
+                <div class="pr-cta">
+                    <a href="https://chromewebstore.google.com/detail/lingomojo-%E2%80%94-jokes-and-sla/cbhnfalfcehnldongaeojnlaheihpejl"
+                       class="pr-btn btn-monthly" target="_blank" rel="noopener">Subscribe monthly</a>
+                </div>
+            </div>
+
+            <!-- PRO ANNUAL -->
+            <div class="pr-card annual">
+                <div class="pr-badge">Best value · Save 50%</div>
+                <div class="pr-name">Pro Annual</div>
+                <div class="pr-price"><sup>$</sup>29.98</div>
+                <div class="pr-price-label">per year · $2.49/mo equivalent</div>
+
+                <div class="pr-divider"></div>
+
+                <div class="limit-box annual-limit">
+                    <div class="limit-main">Unlimited analyses</div>
+                    <div class="limit-sub">no daily cap</div>
+                </div>
+
+                <div class="pr-feature">
+                    <svg class="icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Slang &amp; idiom lookups
+                </div>
+                <div class="pr-feature">
+                    <svg class="icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Cultural context
+                </div>
+                <div class="pr-feature">
+                    <svg class="icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    YouTube &amp; web
+                </div>
+
+                <div class="pr-cta">
+                    <a href="https://chromewebstore.google.com/detail/lingomojo-%E2%80%94-jokes-and-sla/cbhnfalfcehnldongaeojnlaheihpejl"
+                       class="pr-btn btn-annual" target="_blank" rel="noopener">Subscribe annually</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SHARED FEATURES -->
+        <div class="shared">
+            <span class="shared-label">All plans include</span>
+            <span class="shared-item">Joke &amp; sarcasm explanations</span>
+            <span class="shared-item">Slang &amp; idiom lookups</span>
+            <span class="shared-item">Cultural context</span>
+            <span class="shared-item">YouTube Shorts</span>
+            <span class="shared-item">Works on any webpage</span>
+            <span class="shared-item">No account required to start</span>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                © 2026 LingoMojo &nbsp;·&nbsp;
+                <a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp;
+                <a href="/refund.html">Refund Policy</a> &nbsp;·&nbsp;
+                <a href="/privacy.html">Privacy Policy</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
