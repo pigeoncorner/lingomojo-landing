@@ -320,11 +320,11 @@
         annual:  'pri_01krph6p6ww9awrk7v0427q3n2'
       } : {
         token:       'test_250936399869505b40dad89981b',
-        environment: 'sandbox',
         monthly:     'pri_01krs93g6bvz8q4tjvm1bftv5g',
         annual:      'pri_01krs94qhhmd95e0kgrga9t17f'
       };
-      Paddle.Initialize({ token: PADDLE.token, environment: PADDLE.environment });
+      if (!isProd) Paddle.Environment.set('sandbox');
+      Paddle.Initialize({ token: PADDLE.token });
     </script>
 </head>
 <body>
