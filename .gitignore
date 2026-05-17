@@ -1,0 +1,12 @@
+# Temp files used during content updates
+privacy_temp.html
+terms_temp.html
+
+# Unused screenshots
+ext_01_.png
+
+# Paddle documentation
+paddle_instruction.txt
+
+# Claude Code local files
+.claude/
