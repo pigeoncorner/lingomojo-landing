@@ -311,6 +311,21 @@
             .pr-card  { max-width: 100%; }
         }
     </style>
+    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+    <script>
+      var isProd = window.location.hostname === 'thelingomojo.com';
+      var PADDLE = isProd ? {
+        token:   'live_0884a23026f525905749665d9ce',
+        monthly: 'pri_01krph58ab4dkyctbng1q7r3vs',
+        annual:  'pri_01krph6p6ww9awrk7v0427q3n2'
+      } : {
+        token:       'test_250936399869505b40dad89981b',
+        environment: 'sandbox',
+        monthly:     'pri_01krs93g6bvz8q4tjvm1bftv5g',
+        annual:      'pri_01krs94qhhmd95e0kgrga9t17f'
+      };
+      Paddle.Initialize({ token: PADDLE.token, environment: PADDLE.environment });
+    </script>
 </head>
 <body>
 
@@ -411,8 +426,7 @@
                 </div>
 
                 <div class="pr-cta">
-                    <a href="https://chromewebstore.google.com/detail/lingomojo-%E2%80%94-jokes-and-sla/cbhnfalfcehnldongaeojnlaheihpejl"
-                       class="pr-btn btn-monthly" target="_blank" rel="noopener">Subscribe monthly</a>
+                    <a href="#" class="pr-btn btn-monthly" onclick="Paddle.Checkout.open({ items: [{ priceId: PADDLE.monthly, quantity: 1 }] }); return false;">Subscribe monthly</a>
                 </div>
             </div>
 
@@ -444,8 +458,7 @@
                 </div>
 
                 <div class="pr-cta">
-                    <a href="https://chromewebstore.google.com/detail/lingomojo-%E2%80%94-jokes-and-sla/cbhnfalfcehnldongaeojnlaheihpejl"
-                       class="pr-btn btn-annual" target="_blank" rel="noopener">Subscribe annually</a>
+                    <a href="#" class="pr-btn btn-annual" onclick="Paddle.Checkout.open({ items: [{ priceId: PADDLE.annual, quantity: 1 }] }); return false;">Subscribe annually</a>
                 </div>
             </div>
 
